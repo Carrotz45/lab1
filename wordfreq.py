@@ -47,11 +47,34 @@ def countWords(words, stop_words):
             continue
         elif word in counted_words:
             counted_words[word] += 1
-
         else:
-            counted_words.update({word: 1})
-            
+            counted_words.update({word: 1})    
+    #print(counted_words)
     return counted_words
+
+def printTopMost(frequencies,n):
+    words = []
+    for word,freq in frequencies.items():
+        word = word.ljust(20)
+        freq = str(freq)
+        freq = freq.rjust(5)
+        word_tuple = (word, freq)
+        words.append(word_tuple)
+    words = sorted(words, key = lambda x: x[1])
+    words.reverse()
+
+    start = 0
+
+    #Knasigt, printar inte orden?
+    for word in words:
+        if start >= n:
+            break
+        start += 1
+        print(word[0] + word[1])
+    return words
+        
+
+
 
 
 
