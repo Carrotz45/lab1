@@ -13,6 +13,12 @@ def tokenize(lines):
             if char.isspace() == False:
                 if char.isdigit():
                     print(f"{char} is a digit")
+                    current_word_in_making.append(char)
+                    if  start == len(line)-1 or line[start+1].isdigit() != True: #om det är slutet av line eller om nästa karaktär inte är samma som den just nu
+                        new_word = "".join(current_word_in_making) #samma kod gör till funktion om man vill
+                        words.append(new_word)
+                        current_word_in_making = []
+                    
                 elif char.isalpha():
                     print(f"{char} is a letter")
                     current_word_in_making.append(char)
@@ -24,14 +30,29 @@ def tokenize(lines):
 
                 else:
                     print(f"{char} is a symbol")
-                    current_word_in_making.append(char)
-                    if  start == len(line)-1 or line[start+1].isalpha() != True: #om det är slutet av line eller om nästa karaktär inte är samma som den just nu
-                        new_word = "".join(current_word_in_making) #samma kod gör till funktion om man vill
-                        words.append(new_word)
-                        current_word_in_making = []
+                    current_word_in_making.append(char) 
+                    #isalpha kommer inte att fungera ska ändra 
+                    #spelar inte roll eftersom det är bara EN symbol! :(
+                    new_word = "".join(current_word_in_making) #samma kod gör till funktion om man vill
+                    words.append(new_word)
+                    current_word_in_making = []
             start = start + 1
                 
     return words
+
+def countWords(words, stop_words):
+    counted_words = {}
+    for word in words:
+        if word in stop_words:
+            continue
+        elif word in counted_words:
+            counted_words[word] += 1
+
+        else:
+            counted_words.update({word: 1})
+            
+    return counted_words
+
 
 
 test_strings = {"testar strings i en array: ": ["apple", "pie"],
