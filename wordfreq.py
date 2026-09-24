@@ -18,11 +18,19 @@ def tokenize(lines):
                     current_word_in_making.append(char)
                     if  start == len(line)-1 or line[start+1].isalpha() != True: #om det är slutet av line eller om nästa karaktär inte är samma som den just nu
                         new_word = "".join(current_word_in_making) #samma kod gör till funktion om man vill
+                        new_word = new_word.lower()
                         words.append(new_word)
                         current_word_in_making = []
+
                 else:
                     print(f"{char} is a symbol")
-            start = start + 1        
+                    current_word_in_making.append(char)
+                    if  start == len(line)-1 or line[start+1].isalpha() != True: #om det är slutet av line eller om nästa karaktär inte är samma som den just nu
+                        new_word = "".join(current_word_in_making) #samma kod gör till funktion om man vill
+                        words.append(new_word)
+                        current_word_in_making = []
+            start = start + 1
+                
     return words
 
 
